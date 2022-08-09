@@ -1,0 +1,12 @@
+.element__form-like {
+  width: 100%;
+  margin: 0;
+  display: inline-flex; /* при flex ellipsis не срабатывает, надо ограничить ширину*/
+  align-items: baseline;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  border-radius: 0 0 10px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

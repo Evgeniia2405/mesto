@@ -1,0 +1,23 @@
+.popup__container {
+  width: 88.125%;
+  margin: calc(33%) auto;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  }
+
+  @media screen and (min-width: 488px) {
+    .popup__container {
+      max-width: 430px;
+    }
+  }
+
+  @media screen and (min-width: 539px) {
+    .popup__container {
+      margin-top: 178px;
+    }
+  }
+
+
