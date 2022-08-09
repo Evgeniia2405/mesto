@@ -1,8 +1,3 @@
-.transition_place_btn-submit {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
 .transition_place_btn-submit:hover {
   opacity: 0.8;
 }
