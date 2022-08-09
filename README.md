@@ -11,6 +11,6 @@
 
 **Ссылка на сайт**
 
-* [Ссылка на макет в Figma](https://evgeniia2405.github.io/mesto/)
+* [Ссылка](https://evgeniia2405.github.io/mesto/)
 
 
