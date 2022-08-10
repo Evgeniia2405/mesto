@@ -4,6 +4,8 @@
   height: 120px;
   margin: 0 auto;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media screen and (min-width: 768px) {

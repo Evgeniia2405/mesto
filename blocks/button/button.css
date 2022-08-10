@@ -10,4 +10,6 @@
   font: inherit;
   color: inherit;
   background-color: transparent;
+  outline: none;
+  box-shadow: none;
 }
