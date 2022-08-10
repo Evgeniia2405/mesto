@@ -1,8 +1,13 @@
-.profile__button {
+.button {
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
 }
