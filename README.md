@@ -7,11 +7,16 @@
 * Вёрстка адаптивная: минимальная ширина: 320px и максимальная: 1280px.
 * Реализовано одно диалоговое окно “pop-up” — «Редактирование профиля».
 * Применен JavaScript для открытия и закрытие попапа, а также редактирования профиля на странице.
+* Липкий footer.
+* Верстка по PixelPerfect.
+* Проработаны переполнения текстовых полей.
 
 
 **Ссылка на сайт**
 
 * [Ссылка](https://evgeniia2405.github.io/mesto/)
 [https://evgeniia2405.github.io/mesto/]
+
+![Image alt](https://github.com/evgeniia2405/raw/main/images/generatedQrCode.png)
 
 

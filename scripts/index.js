@@ -21,8 +21,8 @@ let jobInput = formElement.querySelector('.popup__input_type_job');
 
 let openPopup = function () {
   popup.classList.add('popup_opened');
-  nameInput.setAttribute('value', profileName.textContent);
-  jobInput.setAttribute('value', profileJob.textContent);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 }
 
 let closePopup = function () {

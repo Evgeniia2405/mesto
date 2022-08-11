@@ -18,11 +18,11 @@
         <div class="profile__info">
           <div class="profile__title">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="button profile__edit-button transition transition_place_btn" aria-label="Редактировать"></button>
+            <button type="button" class="button profile__edit-button" aria-label="Редактировать"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <button type="button" class="button profile__add-button transition transition_place_btn" aria-label="Добавить"></button>
+        <button type="button" class="button profile__add-button" aria-label="Добавить"></button>
       </section>
       <section class="elements content__elements">
         <ul class="elements__grid">
@@ -30,21 +30,21 @@
             <img class="element__img" src="./images/Element-2-dombai.jpg" alt="вид на горы.">
             <div class="element__form-like">
               <h2 class="element__title">Домбай</h2>
-              <button type="button" class="button element__like element__like_disabled transition transition_place_like" aria-label="Like"></button>
+              <button type="button" class="button element__like" aria-label="Like"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__img" src="./images/altansukh-e-yOsDkMUcQDA-unsplash.jpg" alt="вид на озеро.">
             <div class="element__form-like">
               <h2 class="element__title">Монголия</h2>
-              <button type="button" class="button element__like element__like_disabled transition transition_place_like" aria-label="Like"></button>
+              <button type="button" class="button element__like" aria-label="Like"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__img" src="./images/earth-DXuxHw3S5ak-unsplash.jpg" alt="вид на городскую улицу.">
             <div class="element__form-like">
               <h2 class="element__title">Париж</h2>
-              <button type="button" class="button element__like element__like_disabled transition transition_place_like" aria-label="Like"></button>
+              <button type="button" class="button element__like" aria-label="Like"></button>
             </div>
           </li>
           <li class="element">
@@ -58,14 +58,14 @@
             <img class="element__img" src="./images/altansukh-e-yOsDkMUcQDA-unsplash.jpg" alt="вид на озеро.">
             <div class="element__form-like">
               <h2 class="element__title">Монголия</h2>
-              <button type="button" class="button element__like element__like_disabled transition transition_place_like" aria-label="Like"></button>
+              <button type="button" class="button element__like" aria-label="Like"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__img" src="./images/Element-1-Karachaevsk.jpg" alt="вид на крепость.">
             <div class="element__form-like">
               <h2 class="element__title">Карачаево-Черкесия</h2>
-              <button type="button" class="button element__like element__like_disabled transition transition_place_like" aria-label="Like"></button>
+              <button type="button" class="button element__like" aria-label="Like"></button>
             </div>
           </li>
         </ul>
@@ -73,12 +73,12 @@
       <div class="popup">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form">
+          <form name="popup" class="popup__form">
             <input type="text" name="name" placeholder="Имя" class="popup__input popup__input_type_name" required>
             <input type="text" name="job" placeholder="О себе" class="popup__input popup__input_type_job" required>
-            <button type="submit" class="button popup__button-submit transition transition_place_btn-submit">Сохранить</button>
+            <button type="submit" class="button popup__button-submit">Сохранить</button>
           </form>
-          <button type="button" aria-label="Закрыть" class="button popup__close transition transition_place_btn"></button>
+          <button type="button" aria-label="Закрыть" class="button popup__close"></button>
         </div>
       </div>
     </main>

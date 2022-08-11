@@ -8,4 +8,9 @@
   background-position: center;
   margin-bottom: 0;
   cursor: pointer;
+  background-image: url(../../../images/like_white.svg);
+}
+
+.element__like:hover {
+  opacity: 0.5;
 }

@@ -7,11 +7,6 @@
 
 @import url(../blocks/button/button.css);
 
-@import url(../blocks/transition/transition.css);
-@import url(../blocks/transition/_place/transition_place_btn-submit.css);
-@import url(../blocks/transition/_place/transition_place_btn.css);
-@import url(../blocks/transition/_place/transition_place_like.css);
-
 @import url(../blocks/content/content.css);
 @import url(../blocks/content/__profile/content__profile.css);
 @import url(../blocks/content/__elements/content__elements.css);
@@ -26,7 +21,6 @@
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__job/profile__job.css);
-@import url(../blocks/profile/__button/profile__button.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
@@ -42,7 +36,6 @@
 @import url(../blocks/element/__form-like/element__form-like.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__like/element__like.css);
-@import url(../blocks/element/__like/_disabled/element__like_disabled.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);
 
 
