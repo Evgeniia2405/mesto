@@ -11,6 +11,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  grid-row: 2;
+  grid-column: span 2;
+  justify-self: center;
+  justify-items: center;
 }
 
 @media screen and (min-width: 768px) {
