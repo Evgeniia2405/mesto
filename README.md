@@ -17,6 +17,4 @@
 * [Ссылка](https://evgeniia2405.github.io/mesto/)
 [https://evgeniia2405.github.io/mesto/]
 
-![Image alt](https://github.com/evgeniia2405/raw/main/images/generatedQrCode.png)
-
-
+![generatedQrCode](https://user-images.githubusercontent.com/107268897/184111082-c70ea692-5f1f-4824-b7b3-b751f9bf1af3.png)
