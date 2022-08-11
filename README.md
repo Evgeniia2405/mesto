@@ -18,3 +18,5 @@
 [https://evgeniia2405.github.io/mesto/]
 
 ![generatedQrCode](https://user-images.githubusercontent.com/107268897/184111082-c70ea692-5f1f-4824-b7b3-b751f9bf1af3.png)
+
+
