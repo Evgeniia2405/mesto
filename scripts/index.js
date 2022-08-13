@@ -32,17 +32,17 @@ let closePopup = function () {
 // закрытие popup через клик в область вне окна редактирования профиля
 // см. вебинар Егор Шкиря 06.08
 //popup.addEventListener('click', function(event) {
-  // console.log('###event', event);
-  // console.log('###event.target', event.target);
-  // console.log('###event.curentTarget', event.currentTarget);
- // if (event.target === event.currentTarget) {
- //   closePopup();
- // }
+// console.log('###event', event);
+// console.log('###event.target', event.target);
+// console.log('###event.curentTarget', event.currentTarget);
+// if (event.target === event.currentTarget) {
+//   closePopup();
+// }
 //} );
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -50,7 +50,7 @@ function formSubmitHandler (evt) {
 }
 
 editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click',closePopup);
+closeButton.addEventListener('click', closePopup);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
