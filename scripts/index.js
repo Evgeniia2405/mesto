@@ -11,6 +11,45 @@ let formElement = content.querySelector('.popup__form');
 let nameInput = formElement.querySelector('.popup__input_type_name');
 let jobInput = formElement.querySelector('.popup__input_type_job');
 
+const elementsGrid = document.querySelector('.elements__grid');
+const elementTemplate = document.querySelector('.element-template').content;
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+initialCards.forEach(function (element) {
+  const cardElement = elementTemplate.cloneNode(true);
+
+  cardElement.querySelector('.element__title').textContent = element.name;
+  cardElement.querySelector('.element__img').src = element.link;
+
+  elementsGrid.append(cardElement)
+})
+
 // открытие закрытие popup через toggle (см. вебинар Егор Шкиря 06.08)
 // let togglePopup = function () {
 //  popup.classList.toggle('popup_opened');
