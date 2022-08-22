@@ -1,15 +1,26 @@
-let content = document.querySelector('.content');
-let popup = content.querySelector('.popup');
-let editButton = content.querySelector('.profile__edit-button');
-let closeButton = popup.querySelector('.popup__close');
+const content = document.querySelector('.content');
 
-let profileInfo = content.querySelector('.profile__info');
-let profileName = content.querySelector('.profile__name');
-let profileJob = content.querySelector('.profile__job');
+const editButton = content.querySelector('.profile__edit-button');
+const addButton = content.querySelector('.profile__add-button');
 
-let formElement = content.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__input_type_name');
-let jobInput = formElement.querySelector('.popup__input_type_job');
+
+const profileInfo = content.querySelector('.profile__info');
+const profileName = content.querySelector('.profile__name');
+const profileJob = content.querySelector('.profile__job');
+
+
+const popup = content.querySelector('.popup');
+const closeButton = popup.querySelector('.popup__close');
+const popupEdit = content.querySelector('.popup_type_edit');
+const popupAdd = content.querySelector('.popup_type_add');
+
+const formElement = content.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.popup__input_type_name');
+const jobInput = formElement.querySelector('.popup__input_type_job');
+
+const placeInput = formElement.querySelector('.popup__input_type_place');
+const linkInput = formElement.querySelector('.popup__input_type_link');
+
 
 const elementsGrid = document.querySelector('.elements__grid');
 const elementTemplate = document.querySelector('.element-template').content;
@@ -58,10 +69,17 @@ initialCards.forEach(function (element) {
 // closeButton.addEventListener('click',togglePopup);
 
 
-let openPopup = function () {
-  popup.classList.add('popup_opened');
+// const openPopup = function () {
+//   popup.classList.add('popup_opened');
+// }
+
+const openPopupEdit = function () {
+  popupEdit.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+}
+const openPopupAdd = function () {
+  popupAdd.classList.add('popup_opened');
 }
 
 let closePopup = function () {
@@ -88,7 +106,8 @@ function formSubmitHandler(evt) {
   closePopup();
 }
 
-editButton.addEventListener('click', openPopup);
+editButton.addEventListener('click', openPopupEdit);
+addButton.addEventListener('click', openPopupAdd);
 closeButton.addEventListener('click', closePopup);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

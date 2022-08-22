@@ -1,8 +1,7 @@
-.element__trash {
+.element__trash-btn {
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 1;
   margin: 0;
   padding: 0;
   min-width: 18px;
@@ -14,6 +13,6 @@
   background-image: url(../../../images/Trash.png);
 }
 
-.element__trash:hover {
+.element__trash-btn:hover {
   opacity: 0.6;
 }
