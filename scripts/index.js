@@ -14,7 +14,9 @@ const popup = content.querySelector('.popup');
 const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
-const popupImages = content.querySelectorAll('.popup__image');
+
+const popupImages = content.querySelector('.popup__image');
+const popupTitleImage = content.querySelector('.popup__title-image');
 const popupCard = content.querySelector('.popup_type_card');
 
 const formElementEdit = content.querySelector('.popup__form_type_edit');
@@ -56,6 +58,18 @@ const initialCards = [
   }
 ];
 
+
+function handleLike(e) {
+  const likeElement = e.target;
+  likeElement.classList.toggle('element__like_active-btn');
+}
+
+function handleDelete(e) {
+  const cardElement = e.target.closest('.element');
+  cardElement.remove();
+}
+
+
 function addCard(element) {
 
   const newCardElement = elementTemplate.cloneNode(true);
@@ -66,34 +80,32 @@ function addCard(element) {
   cardImage.src = element.link;
 
   const likeButton = newCardElement.querySelector('.element__like-btn');
-  likeButton.addEventListener('click', (e) => {
-    const likeElement = e.target;
-    console.log(likeElement);
-    likeElement.classList.toggle('element__like_active-btn');
-  })
+  likeButton.addEventListener('click', handleLike);
 
   const trashButton = newCardElement.querySelector('.element__trash-btn');
-  trashButton.addEventListener('click', (e) => {
-    const cardElement = e.target.closest('.element');
-    cardElement.remove();
-  })
+  trashButton.addEventListener('click', handleDelete);
 
+  cardImage.addEventListener('click', (e) => {
+    popupCard.classList.add('popup_opened');
+    popupImages.src = element.link;
+    popupTitleImage.textContent = element.name;
+  });
 
   elementsGrid.prepend(newCardElement)
 }
 
 initialCards.forEach(addCard);
-// END 1.
 
 
 
-function handleEdit(e) {  // приходит событие event потому что это обработчик клика
+
+function handleEdit(e) {
   popupEdit.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
-function handleAdd(e) {  // приходит событие event потому что это обработчик клика
+function handleAdd(e) {
   popupAdd.classList.add('popup_opened');
 }
 
@@ -125,26 +137,13 @@ function formAddSubmitHandler(evt) {
   newCard.name = textPlace;
   newCard.link = textLink;
 
-  placeInput.value = ''; // для красоты очищаем поле после добавления данных
+  placeInput.value = '';
   linkInput.value = '';
 
   addCard(newCard);
   handleClose(evt);
 }
 
-// function handleTrash(e) {
-//   const cardElement = e.target.closest('.element');
-//   console.log(e.target);
-//   console.log(cardElement);
-//   cardElement.remove();
-// }
-
-// likeButton.addEventListener('click', console.log('click'));
-
-
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElementAdd.addEventListener('submit', formAddSubmitHandler);
 
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
