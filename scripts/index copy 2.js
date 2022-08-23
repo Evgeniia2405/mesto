@@ -56,17 +56,13 @@ const initialCards = [
 ];
 
 function addCard(element) {
-  console.log(element);
   const cardElement = elementTemplate.cloneNode(true);
-  const cardName = cardElement.querySelector('.element__title');
-  const cardImage = cardElement.querySelector('.element__img');
 
-  cardName.textContent = element.name;
-  cardImage.src = element.link;
+  cardElement.querySelector('.element__title').textContent = element.name;
+  cardElement.querySelector('.element__img').src = element.link;
 
-  elementsGrid.prepend(cardElement)
+  elementsGrid.append(cardElement)
 }
-
 
 initialCards.forEach(addCard);
 // END 1.
@@ -103,25 +99,26 @@ function formEditSubmitHandler(evt) {
   handleClose(evt);
 }
 
-function formAddSubmitHandler(evt) {
-  evt.preventDefault();
-  const textPlace = placeInput.value;
-  const textLink = linkInput.value;
-  const newCard = new Object();
-  newCard.name = textPlace;
-  newCard.link = textLink;
-  placeInput.value = ''; // для красоты очищаем поле после добавления данных
-  linkInput.value = '';
-  addCard(newCard);
-  handleClose(evt);
-}
 
+// function formAddSubmitHandler(evt) {
+//   evt.preventDefault();
+//   //profileName.textContent = placeInput.value;
+//   //profileJob.textContent = linkInput.value;
+//   addCard(element)
+//   handleClose(evt);
+// }
 
 
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElementAdd.addEventListener('submit', formAddSubmitHandler);
+formElementAdd.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const textPlace = placeInput.value;
+  const textLink = linkInput.value;
+  addCard(textPlace, textLink)
+});
 
 
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
