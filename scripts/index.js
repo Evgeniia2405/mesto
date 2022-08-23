@@ -4,6 +4,7 @@ const editButton = content.querySelector('.profile__edit-button');
 const addButton = content.querySelector('.profile__add-button');
 
 
+
 const profileInfo = content.querySelector('.profile__info');
 const profileName = content.querySelector('.profile__name');
 const profileJob = content.querySelector('.profile__job');
@@ -56,17 +57,30 @@ const initialCards = [
 ];
 
 function addCard(element) {
-  console.log(element);
-  const cardElement = elementTemplate.cloneNode(true);
-  const cardName = cardElement.querySelector('.element__title');
-  const cardImage = cardElement.querySelector('.element__img');
+
+  const newCardElement = elementTemplate.cloneNode(true);
+  const cardName = newCardElement.querySelector('.element__title');
+  const cardImage = newCardElement.querySelector('.element__img');
 
   cardName.textContent = element.name;
   cardImage.src = element.link;
 
-  elementsGrid.prepend(cardElement)
-}
+  const likeButton = newCardElement.querySelector('.element__like-btn');
+  likeButton.addEventListener('click', (e) => {
+    const likeElement = e.target;
+    console.log(likeElement);
+    likeElement.classList.toggle('element__like_active-btn');
+  })
 
+  const trashButton = newCardElement.querySelector('.element__trash-btn');
+  trashButton.addEventListener('click', (e) => {
+    const cardElement = e.target.closest('.element');
+    cardElement.remove();
+  })
+
+
+  elementsGrid.prepend(newCardElement)
+}
 
 initialCards.forEach(addCard);
 // END 1.
@@ -110,19 +124,28 @@ function formAddSubmitHandler(evt) {
   const newCard = new Object();
   newCard.name = textPlace;
   newCard.link = textLink;
+
   placeInput.value = ''; // для красоты очищаем поле после добавления данных
   linkInput.value = '';
+
   addCard(newCard);
   handleClose(evt);
 }
 
+// function handleTrash(e) {
+//   const cardElement = e.target.closest('.element');
+//   console.log(e.target);
+//   console.log(cardElement);
+//   cardElement.remove();
+// }
+
+// likeButton.addEventListener('click', console.log('click'));
 
 
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElementAdd.addEventListener('submit', formAddSubmitHandler);
-
 
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
 
