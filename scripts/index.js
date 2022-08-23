@@ -10,7 +10,7 @@ const profileJob = content.querySelector('.profile__job');
 
 
 const popup = content.querySelector('.popup');
-const closeButton = popup.querySelector('.popup__close');
+const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
 
@@ -61,30 +61,43 @@ initialCards.forEach(function (element) {
   elementsGrid.append(cardElement)
 })
 
-// открытие закрытие popup через toggle (см. вебинар Егор Шкиря 06.08)
-// let togglePopup = function () {
-//  popup.classList.toggle('popup_opened');
-// }
-// editButton.addEventListener('click',togglePopup);
-// closeButton.addEventListener('click',togglePopup);
 
-
-// const openPopup = function () {
-//   popup.classList.add('popup_opened');
-// }
-
-const openPopupEdit = function () {
+editButton.addEventListener('click', (e) => {
   popupEdit.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-}
-const openPopupAdd = function () {
+})
+
+addButton.addEventListener('click', (e) => {
   popupAdd.classList.add('popup_opened');
+})
+
+function handleClose(e) {
+  const popupElement = e.target.closest('.popup');
+  popupElement.classList.remove('popup_opened');
 }
 
-let closePopup = function () {
-  popup.classList.remove('popup_opened');
-}
+closeButtons.forEach((closeButton) => {
+  closeButton.addEventListener('click', handleClose)
+});
+
+
+// addButton.addEventListener('click', openPopupAdd);
+// closeButton.addEventListener('click', closePopup);
+
+// const openPopupEdit = function () {
+//   popupEdit.classList.add('popup_opened');
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+// }
+// const openPopupAdd = function () {
+//   popupAdd.classList.add('popup_opened');
+// }
+
+// const closePopup = function (e) {
+//   const popupElement = e.target.closest('.popup');
+//   popupElement.classList.remove('popup_opened');
+// }
 
 // закрытие popup через клик в область вне окна редактирования профиля
 // см. вебинар Егор Шкиря 06.08
@@ -97,19 +110,19 @@ let closePopup = function () {
 // }
 //} );
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup();
+
 }
 
-editButton.addEventListener('click', openPopupEdit);
-addButton.addEventListener('click', openPopupAdd);
-closeButton.addEventListener('click', closePopup);
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+// editButton.addEventListener('click', openPopupEdit);
+// addButton.addEventListener('click', openPopupAdd);
+// closeButton.addEventListener('click', closePopup);
+
+// // Прикрепляем обработчик к форме:
+// // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
