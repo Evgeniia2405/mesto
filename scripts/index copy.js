@@ -13,18 +13,15 @@ const popup = content.querySelector('.popup');
 const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
-const popupImages = content.querySelectorAll('.popup__image');
-const popupCard = content.querySelector('.popup_type_card');
 
-const formElementEdit = content.querySelector('.popup__form_type_edit');
-const nameInput = formElementEdit.querySelector('.popup__input_type_name');
-const jobInput = formElementEdit.querySelector('.popup__input_type_job');
+const formElement = content.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.popup__input_type_name');
+const jobInput = formElement.querySelector('.popup__input_type_job');
 
-const formElementAdd = content.querySelector('.popup__form_type_add');
-const placeInput = formElementAdd.querySelector('.popup__input_type_place');
-const linkInput = formElementAdd.querySelector('.popup__input_type_link');
+const placeInput = formElement.querySelector('.popup__input_type_place');
+const linkInput = formElement.querySelector('.popup__input_type_link');
 
-// START 1. Шесть карточек «из коробки»
+
 const elementsGrid = document.querySelector('.elements__grid');
 const elementTemplate = document.querySelector('.element-template').content;
 
@@ -63,68 +60,69 @@ initialCards.forEach(function (element) {
 
   elementsGrid.append(cardElement)
 })
-// END 1.
 
-function handleEdit(e) {  // приходит событие event потому что это обработчик клика
+
+editButton.addEventListener('click', (e) => {
   popupEdit.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-}
+})
 
-function handleAdd(e) {  // приходит событие event потому что это обработчик клика
+addButton.addEventListener('click', (e) => {
   popupAdd.classList.add('popup_opened');
-}
+})
 
 function handleClose(e) {
   const popupElement = e.target.closest('.popup');
   popupElement.classList.remove('popup_opened');
 }
 
-editButton.addEventListener('click', handleEdit)
-addButton.addEventListener('click', handleAdd)
-
 closeButtons.forEach((closeButton) => {
   closeButton.addEventListener('click', handleClose)
 });
 
 
-function formEditSubmitHandler(evt) {
+// addButton.addEventListener('click', openPopupAdd);
+// closeButton.addEventListener('click', closePopup);
+
+// const openPopupEdit = function () {
+//   popupEdit.classList.add('popup_opened');
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+// }
+// const openPopupAdd = function () {
+//   popupAdd.classList.add('popup_opened');
+// }
+
+// const closePopup = function (e) {
+//   const popupElement = e.target.closest('.popup');
+//   popupElement.classList.remove('popup_opened');
+// }
+
+// закрытие popup через клик в область вне окна редактирования профиля
+// см. вебинар Егор Шкиря 06.08
+//popup.addEventListener('click', function(event) {
+// console.log('###event', event);
+// console.log('###event.target', event.target);
+// console.log('###event.curentTarget', event.currentTarget);
+// if (event.target === event.currentTarget) {
+//   closePopup();
+// }
+//} );
+
+
+function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  handleClose(evt);
+
 }
 
+// editButton.addEventListener('click', openPopupEdit);
+// addButton.addEventListener('click', openPopupAdd);
+// closeButton.addEventListener('click', closePopup);
 
-
-
-
-function formAddSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = placeInput.value;
-  profileJob.textContent = linkInput.value;
-  handleClose(evt);
-}
-
-
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElementEdit.addEventListener('submit', formEditSubmitHandler);
-formElementAdd.addEventListener('submit', formAddSubmitHandler);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// // Прикрепляем обработчик к форме:
+// // он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler);
 
