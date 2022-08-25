@@ -126,14 +126,23 @@ addButton.addEventListener('click', function () {
 
 
 // ЗАКРЫТИЕ ПОПАПОВ ПО КЛИКУ НА КРЕСТИК
-if (closeButtons.length > 0) {
-  for (let index = 0; index < closeButtons.length; index++) {
-    const el = closeButtons[index];
-    el.addEventListener('click', function (e) {
-      closePopup(el.closest('.popup'));
-    });
-  }
-}
+
+// 1. ВАРИАНТ ЗАКРЫТИЯ
+// if (closeButtons.length > 0) {
+//   for (let index = 0; index < closeButtons.length; index++) {
+//     const el = closeButtons[index];
+//     el.addEventListener('click', function (e) {
+//       closePopup(el.closest('.popup'));
+//     });
+//   }
+// }
+
+// 2. ВАРИАНТ ЗАКРЫТИЯ
+// Коллекции NodeList прекрасно поддерживают метод forEach
+// с ним смотрится гораздо изящнее, вот смотрите:
+closeButtons.forEach(button => {
+  button.addEventListener('click', () => closePopup(button.closest('.popup')));
+});
 
 //ФОРМЫ SUBMIT
 function handlerFormSubmitEdit(evt) {
