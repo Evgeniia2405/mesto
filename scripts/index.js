@@ -100,7 +100,7 @@ function createCard(element) {
     popupTitleImage.textContent = element.name;
   });
 
-  return  newCardElement;
+  return newCardElement;
 }
 
 // ФУНКЦИЯ ЗАГРУЗКИ КАРТОЧЕК НА СТРАНИЦУ
@@ -109,8 +109,8 @@ function renderCard(cardElement) {
 }
 
 // ЗАГРУЗКА КАРТОЧЕК ИЗ "КОРОБКИ" НА СТРАНИЦУ
-initialCards.forEach(renderCard);
 
+initialCards.forEach(renderCard);
 
 // ПОПАП РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 editButton.addEventListener('click', function () {
@@ -143,6 +143,8 @@ addButton.addEventListener('click', function () {
 closeButtons.forEach(button => {
   button.addEventListener('click', () => closePopup(button.closest('.popup')));
 });
+
+
 
 //ФОРМЫ SUBMIT
 function handlerFormSubmitEdit(evt) {
