@@ -7,7 +7,7 @@ const profileInfo = content.querySelector('.profile__info');
 const profileName = content.querySelector('.profile__name');
 const profileJob = content.querySelector('.profile__job');
 
-
+const popups = content.querySelectorAll('.popup');
 const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
@@ -55,13 +55,28 @@ const initialCards = [
   }
 ];
 
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
-}
-
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown',keyHandler);
 }
+
+// Функция закрытия через Esc
+function keyHandler(evt) {
+  if (evt.key === 'Escape') {
+    popups.forEach((popup) => {
+      if (popup.classList.contains('popup_opened')) {  // ищем открытый попап
+        closePopup(popup)
+      }
+  })
+  }
+}
+
+function openPopup(popupElement) {
+  popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown',keyHandler);
+};
+
+
 
 function handleLike(e) {
   const likeElement = e.target;
@@ -94,7 +109,7 @@ function createCard(element) {
 
   // ПОПАП С КАРТИНОКЙ
   cardImage.addEventListener('click', (e) => {
-    popupCard.classList.add('popup_opened');
+    openPopup(popupCard);
     popupImages.src = element.link;
     popupImages.alt = element.name;
     popupTitleImage.textContent = element.name;
@@ -145,7 +160,6 @@ closeButtons.forEach(button => {
 });
 
 
-
 //ФОРМЫ SUBMIT
 function handlerFormSubmitEdit(evt) {
   evt.preventDefault();
@@ -172,16 +186,6 @@ function handlerFormSubmitAdd(evt) {
 formElementAdd.addEventListener('submit', handlerFormSubmitAdd);
 
 formElementEdit.addEventListener('submit', handlerFormSubmitEdit);
-
-
-
-
-
-
-
-
-
-
 
 
 
