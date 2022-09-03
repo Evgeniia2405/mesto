@@ -8,6 +8,8 @@ const profileName = content.querySelector('.profile__name');
 const profileJob = content.querySelector('.profile__job');
 
 const popups = content.querySelectorAll('.popup');
+const popupContainer = content.querySelectorAll('.popup__container');
+
 const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
@@ -58,7 +60,9 @@ const initialCards = [
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown',keyHandler);
+  document.removeEventListener('click',overlayHandler);
 }
+
 
 // Функция закрытия через Esc
 function keyHandler(evt) {
@@ -67,13 +71,23 @@ function keyHandler(evt) {
       if (popup.classList.contains('popup_opened')) {  // ищем открытый попап
         closePopup(popup)
       }
-  })
-  }
+    })
 }
+}
+
+// Функция закрытия через Esc
+function overlayHandler(evt) {
+  if (!evt.target.closest('.popupContainer')) {
+        closePopup(evt.target.closest('.popup'));
+      }
+  }
+
+
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown',keyHandler);
+  document.addEventListener('click',overlayHandler);
 };
 
 
