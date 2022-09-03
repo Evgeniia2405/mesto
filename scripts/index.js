@@ -75,13 +75,12 @@ function keyHandler(evt) {
 }
 }
 
-// Функция закрытия через Esc
+// Функция закрытия через клик вне область формы/картинки попапа
 function overlayHandler(evt) {
   if (!evt.target.closest('.popupContainer')) {
         closePopup(evt.target.closest('.popup'));
       }
   }
-
 
 
 function openPopup(popupElement) {
