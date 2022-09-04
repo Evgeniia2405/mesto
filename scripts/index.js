@@ -8,7 +8,7 @@ const profileName = content.querySelector('.profile__name');
 const profileJob = content.querySelector('.profile__job');
 
 const popups = content.querySelectorAll('.popup');
-const popupContainer = content.querySelectorAll('.popup__container');
+
 
 const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
@@ -58,9 +58,9 @@ const initialCards = [
 ];
 
 function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown',keyHandler);
-  document.removeEventListener('click',overlayHandler);
+  popupElement.removeEventListener('click',overlayHandler);
+  popupElement.classList.remove('popup_opened');
 }
 
 
@@ -77,7 +77,7 @@ function keyHandler(evt) {
 
 // Функция закрытия через клик вне область формы/картинки попапа
 function overlayHandler(evt) {
-  if (!evt.target.closest('.popupContainer')) {
+  if (!evt.target.closest('.popup__container')) {
         closePopup(evt.target.closest('.popup'));
       }
   }
@@ -86,7 +86,7 @@ function overlayHandler(evt) {
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown',keyHandler);
-  document.addEventListener('click',overlayHandler);
+  popupElement.addEventListener('click',overlayHandler);
 };
 
 
