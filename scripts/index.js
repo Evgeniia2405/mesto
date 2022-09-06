@@ -1,7 +1,7 @@
 const content = document.querySelector('.content');
 
-const editButton = content.querySelector('.profile__edit-button');
-const addButton = content.querySelector('.profile__add-button');
+const buttonEdit = content.querySelector('.profile__edit-button');
+const buttonAdd = content.querySelector('.profile__add-button');
 
 const profileInfo = content.querySelector('.profile__info');
 const profileName = content.querySelector('.profile__name');
@@ -10,12 +10,12 @@ const profileJob = content.querySelector('.profile__job');
 const popups = content.querySelectorAll('.popup');
 
 
-const closeButtons = content.querySelectorAll('.popup__close');
+const buttonsClose = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
 
-const popupButtonSave = content.querySelector('.popup__button_save');
-const popupButtonAdd = content.querySelector('.popup__button_add');
+const buttonSavePopup = content.querySelector('.popup__button_save');
+const buttonAddPopup = content.querySelector('.popup__button_add');
 
 
 const popupImages = content.querySelector('.popup__image');
@@ -36,52 +36,15 @@ const popupErrors = content.querySelectorAll('.popup__error');
 const elementsGrid = document.querySelector('.elements__grid');
 const elementTemplate = document.querySelector('.element-template').content;
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-
 function closePopup(popupElement) {
-  document.removeEventListener('keydown',keyHandler);
-  popupElement.removeEventListener('click',overlayHandler);
+  document.removeEventListener('keydown', handleKeydownEsc);
+  popupElement.removeEventListener('click', handleClickOverlayPopup);
   popupElement.classList.remove('popup_opened');
 }
 
 
 // Функция закрытия через Esc
-function keyHandler(evt) {
+function handleKeydownEsc(evt) {
   if (evt.key === 'Escape') {
     popups.forEach((popup) => {
       if (popup.classList.contains('popup_opened')) {  // ищем открытый попап
@@ -92,7 +55,7 @@ function keyHandler(evt) {
 }
 
 // Функция закрытия через клик вне область формы/картинки попапа
-function overlayHandler(evt) {
+function handleClickOverlayPopup(evt) {
   if (!evt.target.closest('.popup__container')) {
         closePopup(evt.target.closest('.popup'));
       }
@@ -101,8 +64,8 @@ function overlayHandler(evt) {
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
-  document.addEventListener('keydown',keyHandler);
-  popupElement.addEventListener('click',overlayHandler);
+  document.addEventListener('keydown', handleKeydownEsc);
+  popupElement.addEventListener('click', handleClickOverlayPopup);
 };
 
 
@@ -112,7 +75,7 @@ function handleLike(e) {
   likeElement.classList.toggle('element__like_active-btn');
 }
 
-function handleDelete(e) {
+function handleDeleteCard(e) {
   const cardElement = e.target.closest('.element');
   cardElement.remove();
 }
@@ -134,7 +97,7 @@ function createCard(element) {
 
   // УДАЛЕНИЕ КАРТОЧКИ
   const trashButton = newCardElement.querySelector('.element__trash-btn');
-  trashButton.addEventListener('click', handleDelete);
+  trashButton.addEventListener('click', handleDeleteCard);
 
   // ПОПАП С КАРТИНОКЙ
   cardImage.addEventListener('click', (e) => {
@@ -156,46 +119,32 @@ function renderCard(cardElement) {
 initialCards.forEach(renderCard);
 
 
-// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc and click in overlay
-const popupErrorReset = (formElement) => {
-  const popupErrors = formElement.querySelectorAll('.popup__error');
-  popupErrors.forEach((popupError) => {
-    popupError.textContent = '';
-    });
-  const popupInputs = formElement.querySelectorAll('.popup__input');
-  popupInputs.forEach((popupInput) => {
-    popupInput.classList.remove('popup__input_type_error');
-    });
-};
-
-
-
 // ПОПАП РЕДАКТИРОВАНИЕ ПРОФИЛЯ
-editButton.addEventListener('click', function () {
+buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit); // открываем попап редактирования
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  popupButtonSave.removeAttribute('disabled', 'disabled');
-  popupButtonSave.classList.remove('popup__button_disabled');
-  popupErrorReset(popupEdit);
+  buttonSavePopup.classList.remove('popup__button_disabled');
+  removeDisableButton(buttonSavePopup);
+  resetErrorPopupInput(popupEdit);
 });
 
 // ПОПАП ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
-addButton.addEventListener('click', function () {
+buttonAdd.addEventListener('click', function () {
   openPopup(popupAdd); // открываем попап добавления карточки
   placeInput.value = '';
   linkInput.value = '';
-  popupButtonAdd.classList.add('popup__button_disabled');
-  popupErrorReset(popupAdd);
+  setDisableButton(buttonAddPopup);
+  resetErrorPopupInput(popupAdd);
 });
 
 
 // ЗАКРЫТИЕ ПОПАПОВ ПО КЛИКУ НА КРЕСТИК
 
 // 1. ВАРИАНТ ЗАКРЫТИЯ
-// if (closeButtons.length > 0) {
-//   for (let index = 0; index < closeButtons.length; index++) {
-//     const el = closeButtons[index];
+// if (buttonsClose.length > 0) {
+//   for (let index = 0; index < buttonsClose.length; index++) {
+//     const el = buttonsClose[index];
 //     el.addEventListener('click', function (e) {
 //       closePopup(el.closest('.popup'));
 //     });
@@ -204,21 +153,21 @@ addButton.addEventListener('click', function () {
 
 // 2. ВАРИАНТ ЗАКРЫТИЯ
 // Коллекции NodeList прекрасно поддерживают метод forEach
-// с ним смотрится гораздо изящнее, вот смотрите:
-closeButtons.forEach(button => {
+// с ним смотрится гораздо изящнее:
+buttonsClose.forEach(button => {
   button.addEventListener('click', () => closePopup(button.closest('.popup')));
 });
 
 
 //ФОРМЫ SUBMIT
-function handlerFormSubmitEdit(evt) {
+function handleOpenEditProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
 }
 
-function handlerFormSubmitAdd(evt) {
+function handleOpenAddProfileForm(evt) {
   evt.preventDefault();
   const textPlace = placeInput.value;
   const textLink = linkInput.value;
@@ -234,9 +183,9 @@ function handlerFormSubmitAdd(evt) {
 
 
 
-formElementAdd.addEventListener('submit', handlerFormSubmitAdd);
+formElementAdd.addEventListener('submit', handleOpenAddProfileForm);
 
-formElementEdit.addEventListener('submit', handlerFormSubmitEdit);
+formElementEdit.addEventListener('submit', handleOpenEditProfileForm);
 
 
 

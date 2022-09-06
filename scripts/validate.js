@@ -1,3 +1,11 @@
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 const showInputError = (formElement, inputElement, config, errorMessage) => {
   // Находим элемент ошибки внутри самой функции
@@ -40,20 +48,40 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
+// Установка атрибута disabled
+const setDisableButton = (buttonElement) => {
+  buttonElement.setAttribute('disabled', 'disabled');
+};
+
+// Усдаление атрибута disabled
+const removeDisableButton = (buttonElement) => {
+  buttonElement.removeAttribute('disabled', 'disabled');
+};
 
 const toggleButtonState = (inputList, buttonElement, config) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'disabled');
+    setDisableButton(buttonElement)
   } else {
     // иначе сделай кнопку активной
     buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled', 'disabled');
+    removeDisableButton(buttonElement)
   }
 };
 
+// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
+const resetErrorPopupInput = (formElement) => {
+  const popupErrors = formElement.querySelectorAll('.popup__error');
+  popupErrors.forEach((popupError) => {
+    popupError.textContent = '';
+    });
+  const popupInputs = formElement.querySelectorAll('.popup__input');
+  popupInputs.forEach((popupInput) => {
+    popupInput.classList.remove('popup__input_type_error');
+    });
+};
 
 // ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ПОЛЯМ ФОРМЫ
 const setEventListeners = (formElement, config) => {
@@ -72,14 +100,13 @@ const setEventListeners = (formElement, config) => {
   });
 };
 
-
 // ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ФОРМАМ
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector)); // '.popup__form'
   formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-  });
+  //     formElement.addEventListener('submit', (evt) => {
+  //     evt.preventDefault();
+  // });
     setEventListeners(formElement, config);
 });
 }
