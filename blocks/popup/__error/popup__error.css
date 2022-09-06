@@ -1,12 +1,15 @@
 .popup__error {
-  font-size : 12px;
-  line-height: 14px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  line-height: 14.52px;
+  font-size: 12px;
+  font-weight: 400;
   color: #FF0000;
-  display: none;
-  margin: 4px 0 0 6px;
+  opacity: 0;
+  margin: 0;
+  display: block;
   box-sizing: border-box;
-  height: 25px;
-  min-height: 30px;
+  min-height: 29px;
+  padding: 0px;
 }
 
     /* .popup__error {

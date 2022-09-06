@@ -4,18 +4,18 @@
   width: 238px;
   height: 46px;
   margin: 23px auto 25px auto;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
   line-height: 16.94px;
   font-size: 14px;
   font-weight: 400;
   border-radius: 2px;
   background-color: black;
+  color: #fff;
 }
 
 @media screen and (min-width: 432px) {
   .popup__button {
     width: 358px;
-    margin: 30px auto 37px auto;
+    margin: 6px auto 37px auto;
     height: 50px;
     line-height: 21.78px;
     font-size: 18px;

@@ -14,6 +14,10 @@ const closeButtons = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
 
+const popupButtonSave = content.querySelector('.popup__button_save');
+const popupButtonAdd = content.querySelector('.popup__button_add');
+
+
 const popupImages = content.querySelector('.popup__image');
 const popupTitleImage = content.querySelector('.popup__title-image');
 const popupCard = content.querySelector('.popup_type_card');
@@ -25,6 +29,8 @@ const jobInput = formElementEdit.querySelector('.popup__input_type_job');
 const formElementAdd = content.querySelector('.popup__form_type_add');
 const placeInput = formElementAdd.querySelector('.popup__input_type_place');
 const linkInput = formElementAdd.querySelector('.popup__input_type_link');
+
+const popupErrors = content.querySelectorAll('.popup__error');
 
 
 const elementsGrid = document.querySelector('.elements__grid');
@@ -56,6 +62,16 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 
 function closePopup(popupElement) {
   document.removeEventListener('keydown',keyHandler);
@@ -137,19 +153,40 @@ function renderCard(cardElement) {
 }
 
 // ЗАГРУЗКА КАРТОЧЕК ИЗ "КОРОБКИ" НА СТРАНИЦУ
-
 initialCards.forEach(renderCard);
+
+
+// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc and click in overlay
+const popupErrorReset = (formElement) => {
+  const popupErrors = formElement.querySelectorAll('.popup__error');
+  popupErrors.forEach((popupError) => {
+    popupError.textContent = '';
+    });
+  const popupInputs = formElement.querySelectorAll('.popup__input');
+  popupInputs.forEach((popupInput) => {
+    popupInput.classList.remove('popup__input_type_error');
+    });
+};
+
+
 
 // ПОПАП РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 editButton.addEventListener('click', function () {
   openPopup(popupEdit); // открываем попап редактирования
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  popupButtonSave.removeAttribute('disabled', 'disabled');
+  popupButtonSave.classList.remove('popup__button_disabled');
+  popupErrorReset(popupEdit);
 });
 
 // ПОПАП ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
 addButton.addEventListener('click', function () {
   openPopup(popupAdd); // открываем попап добавления карточки
+  placeInput.value = '';
+  linkInput.value = '';
+  popupButtonAdd.classList.add('popup__button_disabled');
+  popupErrorReset(popupAdd);
 });
 
 
@@ -196,9 +233,11 @@ function handlerFormSubmitAdd(evt) {
 }
 
 
+
 formElementAdd.addEventListener('submit', handlerFormSubmitAdd);
 
 formElementEdit.addEventListener('submit', handlerFormSubmitEdit);
+
 
 
 
