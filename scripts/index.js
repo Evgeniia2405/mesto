@@ -14,6 +14,7 @@ const buttonsClose = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
 
+
 const buttonSavePopup = content.querySelector('.popup__button_save');
 const buttonAddPopup = content.querySelector('.popup__button_add');
 
@@ -66,7 +67,8 @@ function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', handleKeydownEsc);
   popupElement.addEventListener('click', handleClickOverlayPopup);
-};
+  const buttonPopupDisabled = popupElement.querySelector('.popup__button_disabled');
+}
 
 
 
@@ -125,16 +127,16 @@ buttonEdit.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   buttonSavePopup.classList.remove('popup__button_disabled');
-  removeDisableButton(buttonSavePopup);
   resetErrorPopupInput(popupEdit);
 });
+
 
 // ПОПАП ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
 buttonAdd.addEventListener('click', function () {
   openPopup(popupAdd); // открываем попап добавления карточки
   placeInput.value = '';
   linkInput.value = '';
-  setDisableButton(buttonAddPopup);
+  buttonAddPopup.classList.add('popup__button_disabled');
   resetErrorPopupInput(popupAdd);
 });
 

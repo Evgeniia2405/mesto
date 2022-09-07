@@ -49,25 +49,28 @@ const hasInvalidInput = (inputList) => {
 };
 
 // Установка атрибута disabled
-const setDisableButton = (buttonElement) => {
+const setDisableButton = (buttonElement, config) => {
   buttonElement.setAttribute('disabled', 'disabled');
-};
+  buttonElement.classList.add(config.inactiveButtonClass); //'popup__button_disabled'
+}
 
 // Усдаление атрибута disabled
-const removeDisableButton = (buttonElement) => {
+const removeDisableButton = (buttonElement, config) => {
   buttonElement.removeAttribute('disabled', 'disabled');
-};
+  buttonElement.classList.remove(config.inactiveButtonClass); //'popup__button_disabled'
+}
+
 
 const toggleButtonState = (inputList, buttonElement, config) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(config.inactiveButtonClass);
-    setDisableButton(buttonElement)
+    // buttonElement.classList.add(config.inactiveButtonClass);
+    setDisableButton(buttonElement, config)
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    removeDisableButton(buttonElement)
+    // buttonElement.classList.remove(config.inactiveButtonClass);
+    removeDisableButton(buttonElement, config)
   }
 };
 
@@ -108,9 +111,9 @@ const enableValidation = (config) => {
   //     evt.preventDefault();
   // });
     setEventListeners(formElement, config);
+
 });
 }
 
 enableValidation(validationConfig);
-
 
