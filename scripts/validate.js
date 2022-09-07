@@ -2,6 +2,7 @@ const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
+  popupErrorSelector: '.popup__error',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
@@ -48,43 +49,43 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-// Установка атрибута disabled
-const setDisableButton = (buttonElement, config) => {
+
+// Установка атрибута disabled и добавление класса для отображения неактивной кнопки
+const setDisableButton = (buttonElement) => {
   buttonElement.setAttribute('disabled', 'disabled');
-  buttonElement.classList.add(config.inactiveButtonClass); //'popup__button_disabled'
+  buttonElement.classList.add(validationConfig.inactiveButtonClass); //'popup__button_disabled'
 }
 
-// Усдаление атрибута disabled
-const removeDisableButton = (buttonElement, config) => {
+// Удаление атрибута disabled и удаление свойств для отображения неактивной кнопки
+const removeDisableButton = (buttonElement) => {
   buttonElement.removeAttribute('disabled', 'disabled');
-  buttonElement.classList.remove(config.inactiveButtonClass); //'popup__button_disabled'
+  buttonElement.classList.remove(validationConfig.inactiveButtonClass); //'popup__button_disabled'
 }
 
 
-const toggleButtonState = (inputList, buttonElement, config) => {
+const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    // buttonElement.classList.add(config.inactiveButtonClass);
-    setDisableButton(buttonElement, config)
+    setDisableButton(buttonElement)
   } else {
     // иначе сделай кнопку активной
-    // buttonElement.classList.remove(config.inactiveButtonClass);
-    removeDisableButton(buttonElement, config)
+    removeDisableButton(buttonElement)
   }
 };
 
 // Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
 const resetErrorPopupInput = (formElement) => {
-  const popupErrors = formElement.querySelectorAll('.popup__error');
+  const popupErrors = Array.from(formElement.querySelectorAll(validationConfig.popupErrorSelector));
   popupErrors.forEach((popupError) => {
     popupError.textContent = '';
     });
-  const popupInputs = formElement.querySelectorAll('.popup__input');
+  const popupInputs = formElement.querySelectorAll(validationConfig.inputSelector);
   popupInputs.forEach((popupInput) => {
-    popupInput.classList.remove('popup__input_type_error');
+    popupInput.classList.remove(validationConfig.inputErrorClass); //'popup__input_type_error'
     });
 };
+
 
 // ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ПОЛЯМ ФОРМЫ
 const setEventListeners = (formElement, config) => {

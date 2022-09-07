@@ -9,15 +9,12 @@ const profileJob = content.querySelector('.profile__job');
 
 const popups = content.querySelectorAll('.popup');
 
-
 const buttonsClose = content.querySelectorAll('.popup__close');
 const popupEdit = content.querySelector('.popup_type_edit');
 const popupAdd = content.querySelector('.popup_type_add');
 
-
 const buttonSavePopup = content.querySelector('.popup__button_save');
 const buttonAddPopup = content.querySelector('.popup__button_add');
-
 
 const popupImages = content.querySelector('.popup__image');
 const popupTitleImage = content.querySelector('.popup__title-image');
@@ -33,9 +30,9 @@ const linkInput = formElementAdd.querySelector('.popup__input_type_link');
 
 const popupErrors = content.querySelectorAll('.popup__error');
 
-
 const elementsGrid = document.querySelector('.elements__grid');
 const elementTemplate = document.querySelector('.element-template').content;
+
 
 function closePopup(popupElement) {
   document.removeEventListener('keydown', handleKeydownEsc);
@@ -67,9 +64,7 @@ function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', handleKeydownEsc);
   popupElement.addEventListener('click', handleClickOverlayPopup);
-  const buttonPopupDisabled = popupElement.querySelector('.popup__button_disabled');
 }
-
 
 
 function handleLike(e) {
@@ -112,6 +107,7 @@ function createCard(element) {
   return newCardElement;
 }
 
+
 // ФУНКЦИЯ ЗАГРУЗКИ КАРТОЧЕК НА СТРАНИЦУ
 function renderCard(cardElement) {
   elementsGrid.prepend(createCard(cardElement));
@@ -126,7 +122,7 @@ buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit); // открываем попап редактирования
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  buttonSavePopup.classList.remove('popup__button_disabled');
+  removeDisableButton(buttonSavePopup);
   resetErrorPopupInput(popupEdit);
 });
 
@@ -136,7 +132,7 @@ buttonAdd.addEventListener('click', function () {
   openPopup(popupAdd); // открываем попап добавления карточки
   placeInput.value = '';
   linkInput.value = '';
-  buttonAddPopup.classList.add('popup__button_disabled');
+  setDisableButton(buttonAddPopup);
   resetErrorPopupInput(popupAdd);
 });
 
