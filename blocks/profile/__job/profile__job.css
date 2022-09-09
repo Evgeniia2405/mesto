@@ -5,16 +5,12 @@
   line-height: 16.94px;
   font-size: 14px;
   font-weight: 400;
-  justify-self: center;
-  align-self: center;
   max-width: 190px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   grid-row: 2;
   grid-column: span 2;
-  justify-self: center;
-  justify-items: center;
 }
 
 @media screen and (min-width: 768px) {
