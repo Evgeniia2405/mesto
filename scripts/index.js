@@ -122,18 +122,18 @@ buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit); // открываем попап редактирования
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  removeDisableButton(buttonSavePopup);
-  resetErrorPopupInput(popupEdit);
+  removeDisableButton(buttonSavePopup, validationConfig);
+  resetErrorPopupInput(popupEdit, validationConfig);
 });
 
 
-// ПОПАП ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
+// ПОПАП ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ,
 buttonAdd.addEventListener('click', function () {
   openPopup(popupAdd); // открываем попап добавления карточки
   placeInput.value = '';
   linkInput.value = '';
-  setDisableButton(buttonAddPopup);
-  resetErrorPopupInput(popupAdd);
+  setDisableButton(buttonAddPopup, validationConfig);
+  resetErrorPopupInput(popupAdd, validationConfig);
 });
 
 

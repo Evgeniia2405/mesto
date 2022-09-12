@@ -51,38 +51,38 @@ const hasInvalidInput = (inputList) => {
 
 
 // Установка атрибута disabled и добавление класса для отображения неактивной кнопки
-const setDisableButton = (buttonElement) => {
+const setDisableButton = (buttonElement, config) => {
   buttonElement.setAttribute('disabled', 'disabled');
-  buttonElement.classList.add(validationConfig.inactiveButtonClass); //'popup__button_disabled'
+  buttonElement.classList.add(config.inactiveButtonClass); //'popup__button_disabled'
 }
 
 // Удаление атрибута disabled и удаление свойств для отображения неактивной кнопки
-const removeDisableButton = (buttonElement) => {
+const removeDisableButton = (buttonElement, config) => {
   buttonElement.removeAttribute('disabled', 'disabled');
-  buttonElement.classList.remove(validationConfig.inactiveButtonClass); //'popup__button_disabled'
+  buttonElement.classList.remove(config.inactiveButtonClass); //'popup__button_disabled'
 }
 
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, config) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    setDisableButton(buttonElement)
+    setDisableButton(buttonElement, config)
   } else {
     // иначе сделай кнопку активной
-    removeDisableButton(buttonElement)
+    removeDisableButton(buttonElement, config)
   }
 };
 
 // Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
-const resetErrorPopupInput = (formElement) => {
+const resetErrorPopupInput = (formElement, config) => {
   const popupErrors = Array.from(formElement.querySelectorAll(validationConfig.popupErrorSelector));
   popupErrors.forEach((popupError) => {
     popupError.textContent = '';
     });
-  const popupInputs = formElement.querySelectorAll(validationConfig.inputSelector);
+  const popupInputs = formElement.querySelectorAll(config.inputSelector);
   popupInputs.forEach((popupInput) => {
-    popupInput.classList.remove(validationConfig.inputErrorClass); //'popup__input_type_error'
+    popupInput.classList.remove(config.inputErrorClass); //'popup__input_type_error'
     });
 };
 
