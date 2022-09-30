@@ -2,35 +2,27 @@ export default class FormValidator {
   #formSelector;
   #inputSelector;
   #submitButtonSelector;
-  #popupErrorSelector;
   #inactiveButtonClass;
   #inputErrorClass;
   #errorClass;
-
   #formElement;
   #buttonElement;
   #inputList;
-  #popupErrors
-  #popupInputs;
 
   constructor(validationConfig, formElement) {
+
     this.#formSelector = validationConfig.formSelector;
     this.#inputSelector = validationConfig.inputSelector;
     this.#submitButtonSelector = validationConfig.submitButtonSelector;
-    this.#popupErrorSelector = validationConfig.popupErrorSelector;
     this.#inactiveButtonClass = validationConfig.inactiveButtonClass;
     this.#inputErrorClass = validationConfig.inputErrorClass;
     this.#errorClass = validationConfig.errorClass;
-
     this.#formElement = formElement;
+
     this.#buttonElement = this.#formElement.querySelector(this.#submitButtonSelector);
     this.#inputList = Array.from(this.#formElement.querySelectorAll(this.#inputSelector));
-
-    this.#popupErrors = Array.from(this.#formElement.querySelectorAll(this.#popupErrorSelector));
-    this.#popupInputs = this.#formElement.querySelectorAll(this.#inputSelector);
   }
 
- // #showInputError(inputElement) {
 #showInputError(inputElement) {
   // Находим элемент ошибки внутри самой функции
   const errorElement = this.#formElement.querySelector(`#${inputElement.id}-error`);
@@ -63,7 +55,6 @@ export default class FormValidator {
   })
 }
 
-
 // Установка атрибута disabled и добавление класса для отображения неактивной кнопки
 #setDisableButton() {
   this.#buttonElement.setAttribute('disabled', 'disabled');
@@ -87,26 +78,9 @@ export default class FormValidator {
   }
 };
 
-// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
-//resetErrorPopupInput()
-resetErrorPopupInput() {
-
-  this.#popupErrors.forEach((popupError) => {
-    popupError.textContent = '';
-    });
-
-  this.#popupInputs.forEach((popupInput) => {
-    popupInput.classList.remove(this.#inputErrorClass); //'popup__input_type_error'
-    });
-
+// ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ФОРМАМ
+enableValidation() {
   this.#toggleButtonState();
-};
-
-
-// ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ПОЛЯМ ФОРМЫ
-#setEventListeners() {
-  this.#toggleButtonState();
-
 
   this.#inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
@@ -115,11 +89,14 @@ resetErrorPopupInput() {
       this.#toggleButtonState();
     });
   });
-};
-
-// ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ФОРМАМ
-enableValidation() {
-  this.#setEventListeners();
 }
 
+// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
+  resetValidation() {
+    this.#inputList.forEach((inputElement) => {
+      this.#hideInputError(inputElement);
+    });
+
+    this.#toggleButtonState();
+  }
 }
