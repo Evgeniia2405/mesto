@@ -13,6 +13,7 @@ import {
   buttonAdd,
 } from "../utils/constants.js";
 
+import "./index.css";
 
 // СОЗДАНИЕ КАРТОЧКИ
 function createCard(objectCard) {

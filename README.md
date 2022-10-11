@@ -41,6 +41,7 @@
 
 - Созданы классs: Section, Popup, PopupWithImage, PopupWithForm, UserInfo.
 - Отдельные js-файлы подключены в index.html как модули.
+- Настроена сборка Вебпаком
 
 ## **Ссылка на сайт**
 
