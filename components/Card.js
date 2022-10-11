@@ -1,6 +1,7 @@
+import PopupWithImage from './PopupWithImage.js';
 export default class Card {
-  // static template = document.querySelector('.element-template').content;
-  #element
+
+  #element;
   #link;
   #name;
   #templateElement;
@@ -8,13 +9,14 @@ export default class Card {
   #cardImage;
   #trashButton;
   #cardName;
-  #handlePopupCardOpen;
+  #handleCardClick;
 
-  constructor(objectCard, templateElement, handlePopupCardOpen) {
+  constructor(objectCard, templateElement, handleCardClick) {
     this.#link = objectCard.link;
     this.#name = objectCard.name;
     this.#templateElement = templateElement;
-    this.#handlePopupCardOpen = handlePopupCardOpen;
+    this.#handleCardClick = handleCardClick;
+
   }
 
   #getTemplate() {
@@ -22,12 +24,9 @@ export default class Card {
     .content.querySelector(".element").cloneNode(true);
   }
 
-  #handleCardClick() {
-    this.#handlePopupCardOpen(this.#name, this.#link);
-  }
-
   #handleDeleteCard() {
     this.#element.remove();
+    this.#element = null; // обнуление карточки (обсуждалось в slack), remove() удаляет элемент из DOM, но не удаляет сам элемент, и ссылка на этот элемент по-прежнему храниться в this.#element. И чтобы не получилось утечки в памчти, нужно присвоить null, тогда сборщик мусора в js увидит, что на элемент(объект) никто не ссылается (вспоминаем, что в js объекты храняться по ссылкам)и удалит его на совсем.
   }
 
   #handleLike() {
@@ -41,7 +40,6 @@ export default class Card {
   }
 
   createCard() {
-    // this.#element = this.constructor.template.cloneNode(true).children[0];
     this.#element = this.#getTemplate();
 
     this.#cardName = this.#element.querySelector('.element__title');

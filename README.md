@@ -34,7 +34,12 @@
 
 ## **ПР7**
 
-- Созданы классов Card и FormValidator.
+- Созданы классы Card и FormValidator.
+- Отдельные js-файлы подключены в index.html как модули.
+
+## **ПР8**
+
+- Созданы классs: Section, Popup, PopupWithImage, PopupWithForm, UserInfo.
 - Отдельные js-файлы подключены в index.html как модули.
 
 ## **Ссылка на сайт**
