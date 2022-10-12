@@ -1,3 +1,6 @@
+/**
+ * класс FormValidator настраивает валидацию полей формы
+ */
 export default class FormValidator {
   #formSelector;
   #inputSelector;
@@ -46,23 +49,27 @@ export default class FormValidator {
   }
 }
 
-// Функция проверяет наличие невалидного поля
+
+/**
+ * метод проверяет наличие невалидного поля
+ * @returns
+ */
 #hasInvalidInput() {
   // проходим по этому массиву методом some
   return this.#inputList.some((inputElement) => {
-  return !inputElement.validity.valid;
+    return !inputElement.validity.valid;
   })
 }
 
 // Установка атрибута disabled и добавление класса для отображения неактивной кнопки
 #setDisableButton() {
-  this.#buttonElement.setAttribute('disabled', 'disabled');
+  this.#buttonElement.setAttribute('disabled', '');
   this.#buttonElement.classList.add(this.#inactiveButtonClass); //'popup__button_disabled'
 }
 
 // Удаление атрибута disabled и удаление свойств для отображения неактивной кнопки
 #removeDisableButton(){
-  this.#buttonElement.removeAttribute('disabled', 'disabled');
+  this.#buttonElement.removeAttribute('disabled');
   this.#buttonElement.classList.remove(this.#inactiveButtonClass); //'popup__button_disabled'
 }
 
@@ -77,7 +84,10 @@ export default class FormValidator {
   }
 };
 
-// ДОБАВЛЕНИЕ ОБРАБОТЧИКОВ ВСЕМ ФОРМАМ
+
+/**
+ * добавление обработчиков всем формам
+ */
 enableValidation() {
   this.#toggleButtonState();
 
@@ -90,7 +100,9 @@ enableValidation() {
   });
 }
 
-// Функция для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
+/**
+ * метод для очистки текста ошибок после открытия формы ранее закрытой через esc || click in overlay
+ */
   resetValidation() {
     this.#inputList.forEach((inputElement) => {
       this.#hideInputError(inputElement);

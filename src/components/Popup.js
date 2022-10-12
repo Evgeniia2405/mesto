@@ -1,3 +1,6 @@
+/**
+ * класс Popup отвечает за открытие и закрытие попапа
+ */
 export default class Popup {
 
   #popup;
@@ -6,11 +9,17 @@ export default class Popup {
     this.#popup = document.querySelector(popupSelector);
   }
 
+  /**
+   * публичный метод отвечают за открытие попапа.
+   */
   openPopup() {
     this.#popup.classList.add('popup_opened');
     document.addEventListener('keydown', this.#handleEscClose);
   }
 
+  /**
+   * публичный метод отвечают за закрытие попапа.
+   */
   closePopup() {
     this.#popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this.#handleEscClose);
@@ -27,7 +36,9 @@ export default class Popup {
         this.closePopup();
     }
   }
-
+  /**
+   * метод добавляет слушатель клика иконке закрытия попапа. Модальное окно также закрывается при клике на затемнённую область вокруг формы.
+   */
   setEventListeners() {
     const popupCloseButton = this.#popup.querySelector('.popup__close');
     popupCloseButton.addEventListener('click', () => {

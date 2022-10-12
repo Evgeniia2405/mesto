@@ -1,4 +1,6 @@
-import PopupWithImage from './PopupWithImage.js';
+/**
+ * класс Card создаёт карточку с текстом и ссылкой на изображение
+ */
 export default class Card {
 
   #element;
@@ -39,6 +41,10 @@ export default class Card {
     this.#trashButton.addEventListener("click", this.#handleDeleteCard.bind(this));
   }
 
+  /**
+   * функция создания карточки
+   * @returns DOM-элемент карточки
+   */
   createCard() {
     this.#element = this.#getTemplate();
 

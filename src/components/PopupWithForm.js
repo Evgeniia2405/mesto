@@ -1,3 +1,6 @@
+/**
+ * Класс PopupWithForm наследует от Popup
+ */
 import Popup from '../components/Popup.js';
 
 export default class PopupWithForm extends Popup {
@@ -15,12 +18,36 @@ export default class PopupWithForm extends Popup {
     this.#handleFormSubmit = handleFormSubmit;
   }
 
+  /**
+   * публичный метод для получения актуального элемента формы
+   * @returns DOM-элемент формы
+   */
+  getFormPopup() {
+    return this.#formPopup;
+  }
+
+  /**
+   * приватгый метод собирает данные всех полей формы.
+   * @returns объект в свойства которого записываются значения полей input
+   */
   #getInputValues() {
     this.#formValues = {};
     this.#inputList.forEach(input => this.#formValues[input.name] = input.value);
     return this.#formValues;
   }
 
+  /**
+   * публичный метод устанавливает значения в поля формы, данные берутся из объекта
+   * @param {*} inputObject в объекте свойства для полей input
+   */
+  setInputValues(inputObject) {
+    this.#inputList.forEach(input => input.value = inputObject[input.name]);
+  }
+
+
+  /**
+   * публичный метод добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
+   */
   setEventListeners() {
     super.setEventListeners();
 
@@ -31,9 +58,11 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  /**
+   * метод для закрытия попапа и сброса форма.
+   */
   closePopup() {
     this.#formPopup.reset();
     super.closePopup()
   }
-
 }
