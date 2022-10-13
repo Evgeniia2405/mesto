@@ -63,7 +63,7 @@ export default class FormValidator {
 
 // Установка атрибута disabled и добавление класса для отображения неактивной кнопки
 #setDisableButton() {
-  this.#buttonElement.setAttribute('disabled', '');
+  this.#buttonElement.setAttribute('disabled', true);
   this.#buttonElement.classList.add(this.#inactiveButtonClass); //'popup__button_disabled'
 }
 
