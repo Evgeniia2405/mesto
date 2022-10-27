@@ -3,9 +3,12 @@ export default class UserInfo {
   #nameSelector;
   #jobSelector;
   #profileObject;
-  constructor({ nameSelector, jobSelector }) {
+  #avatarSelector;
+  #id;
+  constructor({ nameSelector, jobSelector, avatarSelector }) {
     this.#nameSelector = document.querySelector(nameSelector);
     this.#jobSelector = document.querySelector(jobSelector);
+    this.#avatarSelector = document.querySelector(avatarSelector);
   }
 
   /**
@@ -14,8 +17,8 @@ export default class UserInfo {
    */
   getUserInfo() {
     this.#profileObject = { };
-    this.#profileObject.username = this.#nameSelector.textContent;
-    this.#profileObject.userjob = this.#jobSelector.textContent;
+    this.#profileObject.name = this.#nameSelector.textContent;
+    this.#profileObject.about = this.#jobSelector.textContent;
     return this.#profileObject;
   }
 
@@ -24,7 +27,21 @@ export default class UserInfo {
    * @param {*} formData объект в свойствах которого данные для профиля
    */
   setUserInfo(formData) {
-    this.#nameSelector.textContent = formData.username;
-    this.#jobSelector.textContent = formData.userjob;
+    this.#nameSelector.textContent = formData.name;
+    this.#jobSelector.textContent = formData.about;
+    this.#avatarSelector.src = formData.avatar;
+  }
+
+  setUserId(formData) {
+    return formData._id;
+  }
+
+  getUserId() {
+    return this._id;
+  }
+
+  setUserAvatar(avatarData) {
+    this.#avatarSelector.src = avatarData.avatar;
+    console.log(avatarData.avatar)
   }
 }

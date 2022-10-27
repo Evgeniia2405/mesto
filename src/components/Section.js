@@ -2,12 +2,10 @@
  * класс Section отвечает за отрисовку элементов на странице
  */
 export default class Section {
-  #renderedItems;
   #renderer;
   #container;
 
-  constructor({ items, renderer }, selector) {
-    this.#renderedItems = items;
+  constructor({ renderer }, selector) {
     this.#renderer = renderer;
     this.#container = document.querySelector(selector);
   }
@@ -15,8 +13,8 @@ export default class Section {
   /**
    * функция отвечает за создание и отрисовку данных на странице
    */
-  renderItems() {
-    this.#renderedItems.forEach(item => this.#renderer(item))
+  renderItems(items) {
+    items.forEach(item => this.#renderer(item))
   }
 
   /**
