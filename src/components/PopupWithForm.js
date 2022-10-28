@@ -48,7 +48,6 @@ export default class PopupWithForm extends Popup {
     this.#inputList.forEach(input => input.value = inputObject[input.name]);
   }
 
-
   /**
    * публичный метод добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
    */
@@ -57,14 +56,14 @@ export default class PopupWithForm extends Popup {
 
     this.#formPopup.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      // this.#buttonPopup.textContent = 'Сохранение...';// меняем его, чтобы показать пользователю ожидание
-      this.#handleFormSubmit(this.#getInputValues());
-        // .then(() => {        // !!! Пока не получилось реализовать, консоль выдает ошибку о не возможности чтения .then
-        //   this.closePopup();
-        // })
-        // .finally(() => {
-        //   this.#buttonPopup.textContent = initialText;
-        // }) // в любом случае меняется текст кнопки обратно на начальный в `finally`
+      this.#buttonPopup.textContent = 'Сохранение...';// меняем его, чтобы показать пользователю ожидание
+      this.#handleFormSubmit(this.#getInputValues())
+        .then(() => {
+          this.closePopup();
+        })
+        .finally(() => {
+          this.#buttonPopup.textContent = this.#initialText;
+        }) // в любом случае меняется текст кнопки обратно на начальный в `finally`
     });
   }
 
@@ -75,17 +74,4 @@ export default class PopupWithForm extends Popup {
     this.#formPopup.reset();
     super.closePopup()
   }
-
-  /**
-   * метод для уведомления пользователя о процессе загрузки.
-   */
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this.#buttonPopup.textContent = 'Сохранение...';
-    }
-    else {
-      this.#buttonPopup.textContent = this.#initialText
-    }
-  }
 }
-
