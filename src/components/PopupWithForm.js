@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
   #formPopup;
   #handleFormSubmit;
   #buttonPopup;
+  #initialText;
 
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
@@ -18,6 +19,7 @@ export default class PopupWithForm extends Popup {
     this.#buttonPopup = this.#popup.querySelector('.popup__button');
     this.#inputList = this.#popup.querySelectorAll('.popup__input');
     this.#handleFormSubmit = handleFormSubmit;
+    this.#initialText = this.#buttonPopup.textContent;
   }
 
   /**
@@ -55,9 +57,14 @@ export default class PopupWithForm extends Popup {
 
     this.#formPopup.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      // this.renderLoading(false);
+      // this.#buttonPopup.textContent = 'Сохранение...';// меняем его, чтобы показать пользователю ожидание
       this.#handleFormSubmit(this.#getInputValues());
-      this.closePopup();
+        // .then(() => {        // !!! Пока не получилось реализовать, консоль выдает ошибку о не возможности чтения .then
+        //   this.closePopup();
+        // })
+        // .finally(() => {
+        //   this.#buttonPopup.textContent = initialText;
+        // }) // в любом случае меняется текст кнопки обратно на начальный в `finally`
     });
   }
 
@@ -77,7 +84,7 @@ export default class PopupWithForm extends Popup {
       this.#buttonPopup.textContent = 'Сохранение...';
     }
     else {
-      this.#buttonPopup.textContent = 'Сохранить'
+      this.#buttonPopup.textContent = this.#initialText
     }
   }
 }

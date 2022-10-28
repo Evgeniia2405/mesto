@@ -1,17 +1,18 @@
 /**
  * класс PopupWithImage наследует от Popup
  */
-import {
-  popupImages,
-  popupTitleImage,
-} from "../utils/constants.js";
-
 import Popup from '../components/Popup.js';
 
 export default class PopupWithImage extends Popup {
+  #popup;
+  #popupImage;
+  #popupTitleImage;
 
   constructor(popupSelector) {
     super(popupSelector);
+    this.#popup = document.querySelector(popupSelector);
+    this.#popupImage = this.#popup.querySelector('.popup__image');
+    this.#popupTitleImage = this.#popup.querySelector('.popup__title-image');
   }
 
   /**
@@ -19,9 +20,9 @@ export default class PopupWithImage extends Popup {
    * @param {*} objectCard объектс содержит два свойства: текст имени и ссылку на изображение в формате 'https://pictures.jpg'
    */
   openPopup(objectCard) {
-    popupImages.src = objectCard.link;
-    popupImages.alt = objectCard.name;
-    popupTitleImage.textContent = objectCard.name;
+    this.#popupImage.src = objectCard.link;
+    this.#popupImage.alt = objectCard.name;
+    this.#popupTitleImage.textContent = objectCard.name;
     super.openPopup()
   }
 }

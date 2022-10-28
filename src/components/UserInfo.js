@@ -4,7 +4,7 @@ export default class UserInfo {
   #jobSelector;
   #profileObject;
   #avatarSelector;
-  #id;
+
   constructor({ nameSelector, jobSelector, avatarSelector }) {
     this.#nameSelector = document.querySelector(nameSelector);
     this.#jobSelector = document.querySelector(jobSelector);
@@ -42,6 +42,5 @@ export default class UserInfo {
 
   setUserAvatar(avatarData) {
     this.#avatarSelector.src = avatarData.avatar;
-    console.log(avatarData.avatar)
   }
 }

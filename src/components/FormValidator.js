@@ -84,13 +84,10 @@ export default class FormValidator {
   }
 };
 
-
 /**
  * добавление обработчиков всем формам
  */
-enableValidation() {
-  this.#toggleButtonState();
-
+#setHandlerForm() {
   this.#inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this.#checkInputValidity(inputElement);
@@ -98,6 +95,14 @@ enableValidation() {
       this.#toggleButtonState();
     });
   });
+}
+
+/**
+ * валидация форм
+ */
+enableValidation() {
+  this.#toggleButtonState();
+  this.#setHandlerForm();
 }
 
 /**

@@ -17,8 +17,6 @@ export const API_OPTIONS = {
 }
 
 export const cardListSelector = '.elements__grid';
-export const popupImages = document.querySelector('.popup__image');
-export const popupTitleImage = document.querySelector('.popup__title-image');
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const avatarEdit = document.querySelector('.profile__avatar');

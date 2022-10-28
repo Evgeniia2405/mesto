@@ -7,30 +7,23 @@ export default class Api {
     this.#header = config.headers;
   }
 
+  #checkResponse(response) { // Михаил Барсегян, спасибо за описание метода!
+    if (response.ok) {
+      return response.json()
+    }
+    return Promise.reject(new Error(response.status))
+  }
+
   getUserInfo() {
     return fetch(`${this.#url}/users/me`, {
       headers: this.#header})
-        .then(response => {   //получает юрл и объект опций, возвращаем промис
-          if (response.ok) {
-            // console.log(response)
-          return response.json()
-          }
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+      .then(this.#checkResponse) //Обратите внимание, что передается только ссылка на метод. Не нужно его вызывать. Он сам вызовется, так как в then нужно передавать именно функцию, а не вызов функции.
   }
 
   getInitialCards() {
     return fetch(`${this.#url}/cards`, {
       headers: this.#header})
-        .then(response => {   //получает юрл и объект опций, возвращаем промис
-          if (response.ok) {
-            // console.log(response)
-          return response.json()
-          }
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+      .then(this.#checkResponse)
   }
 
   editUserInfo(name, about) {
@@ -39,15 +32,7 @@ export default class Api {
       headers: this.#header,
       body: JSON.stringify({ name, about }),
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          // console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
 
   editUserAvatar(avatar) {
@@ -56,15 +41,7 @@ export default class Api {
       headers: this.#header,
       body: JSON.stringify({ avatar }),
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
 
   createCard(name, link) {
@@ -73,32 +50,15 @@ export default class Api {
       headers: this.#header,
       body: JSON.stringify({ name, link }),
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
-
 
   addLikeCard(cardId) {
     return fetch(`${this.#url}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this.#header,
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          // console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
 
   removeLikeCard(cardId) {
@@ -106,15 +66,7 @@ export default class Api {
       method: 'DELETE',
       headers: this.#header,
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          // console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
 
 
@@ -122,16 +74,7 @@ export default class Api {
     return fetch(`${this.#url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.#header,
-      // body: JSON.stringify({ title }),
     })
-      .then(response => {   //получает юрл и объект опций, возвращаем промис
-        if (response.ok) {
-          // console.log(response)
-        return response.json()
-      }
-
-      return Promise.reject(new Error(response.status))
-    })
-    .catch((err) => Promise.reject(err));
+    .then(this.#checkResponse)
   }
 }
