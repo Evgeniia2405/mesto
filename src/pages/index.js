@@ -1,6 +1,7 @@
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
 import Api from '../components/Api.js';
@@ -18,7 +19,6 @@ import {
 import "./index.css";
 
 let usrId = ' '; //переменная для определения Id пользователя
-let cardId = ' '; //переменная для определения Id карточки
 let cardForDelete = ' '; //элемент карточки под удаление
 
 const api = new Api(API_OPTIONS);
@@ -39,7 +39,6 @@ Promise.all(promises)
     userInfo.setUserInfo(userData);
     userInfo.setUserId(userData);
     usrId = userData._id
-    console.log('inter',usrId)
     cardsList.renderItems(CardsData);
   })
   .catch((err) => {
@@ -75,7 +74,6 @@ function createNewCard(objectCard) {
 
     handleTrashClick: () => {
       popupConfirmForm.openPopup(objectCard);
-      cardId = objectCard._id;
       cardForDelete = card
     }
   },
@@ -182,9 +180,10 @@ popupAvatarForm.setEventListeners();
 /**
  * экземпляр формы подтверждения удаления карточки
  */
-const popupConfirmForm = new PopupWithForm({
+const popupConfirmForm = new PopupWithConfirm({
   popupSelector: '.popup_type_confirmation',
-  handleFormSubmit: ()  => {
+  handleFormSubmit: (cardId)  => {
+    console.log(cardId);
     return api.deleteCard(cardId) // cardId определяем в экземпляре Card
     .then(() => {
       cardForDelete.handleDeleteCard();// cardForDelete определяем в экземпляре Card
