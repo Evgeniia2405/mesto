@@ -22,6 +22,14 @@ export default class Section {
    * @param {string} element DOM-элемент
    */
   addItem(element) {
+    this.#container.append(element);
+  }
+
+    /**
+   * метод addItemNew принимает DOM-элемент и добавляет его в начало страницы
+   * @param {string} element DOM-элемент
+   */
+  addItemNew(element) {
     this.#container.prepend(element);
   }
 }

@@ -106,7 +106,7 @@ const popupAddForm = new PopupWithForm({
   handleFormSubmit: (cardData)  => {
     return api.createCard(cardData.name, cardData.link)
     .then(formData => {
-      cardsList.addItem(createNewCard(formData));
+      cardsList.addItemNew(createNewCard(formData));
     })
     .catch((err) => {
       console.log('Ошибка при добавлении новой карточки', err);
