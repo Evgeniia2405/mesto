@@ -23,7 +23,7 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this.#url}/cards`, {
       headers: this.#header})
-      .then(this.#checkResponse)
+      .then(this.#checkResponse, console.log(this.#header))
   }
 
   editUserInfo(name, about) {

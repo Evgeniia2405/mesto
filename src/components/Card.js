@@ -20,6 +20,7 @@ export default class Card {
   #likeCount;
   #objectCard;
   #usrId;
+  #cardId;
   #likeArray;
 
   constructor(objectCard, templateElement, {handleCardClick, handleAddLike, handleRemoveLike, handleTrashClick}, usrId) {
@@ -29,6 +30,9 @@ export default class Card {
     this.#likes = objectCard.likes;
     this.#owner = objectCard.owner;
     this.#objectCard = objectCard;
+
+    this.#cardId = objectCard._id //
+
     this.#templateElement = templateElement;
 
     this.#handleCardClick = handleCardClick;
@@ -40,7 +44,7 @@ export default class Card {
     this.#handleTrashClick = handleTrashClick;
 
     this.#likeArray = objectCard.likes;
-    this.#usrId = usrId
+    this.#usrId = usrId;
   }
 
   #getTemplate() {
@@ -75,7 +79,9 @@ export default class Card {
   #setEventListeners() {
     this.#cardImage.addEventListener("click", this.#handleCardClick.bind(this));
     this.#likeButton.addEventListener("click", this.#clickLike.bind(this));
-    this.#trashButton.addEventListener("click", this.#handleTrashClick.bind(this));
+    this.#trashButton.addEventListener("click", () => {
+      this.#handleTrashClick(this.#cardId)});
+    // this.#trashButton.addEventListener("click", this.#handleTrashClick.bind(this, this.#cardId));
   }
 
   setLikeInfo(array) {

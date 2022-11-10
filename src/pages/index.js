@@ -22,7 +22,6 @@ let usrId = ' '; //переменная для определения Id пол�
 let cardForDelete = ' '; //элемент карточки под удаление
 
 const api = new Api(API_OPTIONS);
-
 //Экземпляр класса Section
 const cardsList = new Section({
   renderer: (objectCard) => {
@@ -72,8 +71,8 @@ function createNewCard(objectCard) {
         console.log('Ошибка при удалении Like карточки', err);
     });},
 
-    handleTrashClick: () => {
-      popupConfirmForm.openPopup(objectCard);
+    handleTrashClick: (cardId) => {
+      popupConfirmForm.openPopup(cardId);
       cardForDelete = card
     }
   },
