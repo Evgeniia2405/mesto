@@ -7,7 +7,7 @@ export default class Api {
     this.#header = config.headers;
   }
 
-  #checkResponse(response) { // Михаил Барсегян, спасибо за описание метода!
+  #checkResponse(response) {
     if (response.ok) {
       return response.json()
     }
